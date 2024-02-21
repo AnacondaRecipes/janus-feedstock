@@ -17,8 +17,8 @@ requirements:
   host:
     - python
     - pip
-    - setuptools
-    - wheel
+    - setuptools >=51
+    - wheel >=0.36
   run:
     - python
     - typing_extensions >=3.7.4.3
@@ -28,8 +28,8 @@ test:
     - janus
   requires:
     - pip
-    - pytest
-    - pytest-asyncio
+    - pytest >=6.2.5
+    - pytest-asyncio >=0.16.0
   source_files:
     - tests
   commands:
