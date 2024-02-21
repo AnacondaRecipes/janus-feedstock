@@ -11,26 +11,44 @@ source:
 
 build:
   number: 0
-  noarch: python
-  script: '{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv '
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
+    - python
     - pip
-    - python >=3.7
+    - setuptools
+    - wheel
   run:
-    - python >=3.7
+    - python
     - typing_extensions >=3.7.4.3
 
 test:
   imports:
     - janus
+  requires:
+    - pip
+    - pytest
+    - pytest-asyncio
+  source_files:
+    - tests
+  commands:
+    - pip check
+    - pytest -v tests
 
 about:
   home: https://github.com/aio-libs/janus/
   license: Apache-2.0
   license_file: LICENSE
+  license_family: APACHE
   summary: Mixed sync-async queue to interoperate between asyncio tasks and classic threads
+  description: |
+    Mixed sync-async queue, supposed to be used for communicating between classic synchronous (threaded)
+    code and asynchronous (in terms of asyncio) one.
+    Like Janus god the queue object from the library has two faces: synchronous and asynchronous interface.
+    Synchronous is fully compatible with standard queue, asynchronous one follows asyncio queue design.
+  doc_url: https://github.com/aio-libs/janus
+  dev_url: https://github.com/aio-libs/janus
 
 extra:
   recipe-maintainers:
