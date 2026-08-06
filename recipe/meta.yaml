@@ -1,13 +1,13 @@
 {% set name = "janus" %}
-{% set version = "1.0.0" %}
+{% set version = "2.0.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: df976f2cdcfb034b147a2d51edfc34ff6bfb12d4e2643d3ad0e10de058cb1612
+  sha256: 0970f38e0e725400496c834a368a67ee551dc3b5ad0a257e132f5b46f2e77770
 
 build:
   number: 0
@@ -21,20 +21,20 @@ requirements:
     - wheel >=0.36
   run:
     - python
-    - typing_extensions >=3.7.4.3
 
 test:
   imports:
     - janus
   requires:
     - pip
-    - pytest >=6.2.5
-    - pytest-asyncio >=0.16.0
+    - pytest
+    - pytest-asyncio
+    - pytest-benchmark
   source_files:
     - tests
   commands:
     - pip check
-    - pytest -v tests
+    - pytest -vv tests
 
 about:
   home: https://github.com/aio-libs/janus/
